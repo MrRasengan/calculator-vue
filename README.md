@@ -1,35 +1,34 @@
-# vue-app
+# Приложение калькулятор на Vue.js
 
-This template should help get you started developing with Vue 3 in Vite.
+Этот проект представляет собой простой калькулятор, созданный с использованием Vue.js и библиотеки mathjs для выполнения математических вычислений.
 
-## Recommended IDE Setup
+## Структура проекта
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- src/
+  - components/
+    - Calculator.vue — основной компонент калькулятора.
+  - App.vue — главный компонент приложения.
 
-## Customize configuration
+## Зависимости
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- [Vue.js](https://vuejs.org/) — JavaScript-фреймворк для создания пользовательских интерфейсов.
+- [mathjs](https://mathjs.org/) — библиотека для выполнения математических операций.
 
-## Project Setup
+## Описание компонента Calculator.vue
 
-```sh
-npm install
-```
+1. Шаблон (template):
+   - Содержит поле ввода для отображения текущего выражения и кнопки для цифр и операций.
+   - Кнопки создаются с помощью цикла v-for, что упрощает добавление новых кнопок.
 
-### Compile and Hot-Reload for Development
+2. Скрипт (script):
+   - Импортирует функцию evaluate из библиотеки mathjs для выполнения математических вычислений.
+   - Определяет имя компонента как Calculator.
+   - В data хранится текущее выражение (input) и массив кнопок (buttons).
+   - Метод handleButtonClick(button) обрабатывает нажатия кнопок:
+     - Если нажата кнопка C, очищает ввод.
+     - Если нажата кнопка =, вызывает метод calculate().
+     - В противном случае добавляет символ к текущему вводу.
+   - Метод calculate() выполняет вычисление выражения и обновляет поле ввода. В случае ошибки выводит сообщение "Error".
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+3. Стили (style scoped):
+   - Простые стили для оформления калькулятора, включая размеры, отступы и тени для улучшения визуального восприятия.
