@@ -1,5 +1,5 @@
 <template>
-  <div class="calculator">
+  <div class="calculator" @keydown="handleKeyPress" tabindex="0">
     <h1>Калькулятор</h1>
     <input v-model="input" placeholder="0" readonly />
     <h2 v-if="result !== null">Результат: {{ result }}</h2>
@@ -49,10 +49,22 @@ export default {
       this.input = '';
       this.result = null;
     },
+    handleKeyPress(event) {
+      const key = event.key;
+
+      if (this.numbers.includes(Number(key))) {
+        this.appendToInput(Number(key));
+      } else if (this.operators.includes(key)) {
+        this.appendToInput(key);
+      } else if (key === 'Enter') {
+        this.calculate();
+      } else if (key === 'Backspace') {
+        this.clear();
+      }
+    },
   },
 };
 </script>
-
 
 <style scoped>
 .calculator {
