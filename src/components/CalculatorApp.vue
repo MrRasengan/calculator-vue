@@ -1,4 +1,6 @@
 <template>
+<div :class="['calculator', theme]">
+  <button @click="toggleTheme">Сменить тему</button>
   <div class="calculator" @keydown="handleKeyPress" tabindex="0">
     <h1>Калькулятор</h1>
     <input v-model="input" placeholder="0" readonly />
@@ -10,6 +12,8 @@
       <button @click="clear">C</button>
     </div>
   </div>
+</div>
+
 </template>
 
 <script>
@@ -22,9 +26,13 @@ export default {
       result: null,
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
       operators: ['+', '-', '*', '/', '.'],
+      theme: 'light', // Добавлено состояние темы
     };
   },
   methods: {
+    toggleTheme() {
+    this.theme = this.theme === 'light' ? 'dark' : 'light';
+  },
     appendToInput(value) {
       if (this.isValidInput(value)) {
         this.input += value.toString();
@@ -74,7 +82,27 @@ export default {
   border: 1px solid #000;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
+  background-color: var(--bg-color);
+}
+
+.input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: right;
+  border: 1px solid #000;
+  background-color: var(--input-bg-color);
+}
+
+.button {
+  padding: 20px;
+  font-size: 18px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 input {
@@ -109,5 +137,20 @@ button:hover {
 
 h2 {
   margin-top: 20px;
+}
+
+/* Темная тема */
+.dark {
+  --bg-color: #333;
+  --input-bg-color: #555;
+  --button-bg-color: #000;
+  --button-text-color: white;
+}
+
+.light {
+  --bg-color: #fff;
+  --input-bg-color: #f0f0f0;
+  --button-bg-color: #000;
+  --button-text-color: white;
 }
 </style>
